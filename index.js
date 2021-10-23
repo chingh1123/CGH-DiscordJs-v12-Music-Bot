@@ -11,8 +11,6 @@ const client = new Client();
 client.commands = new Collection();
 client.queue = new Map();
 
-require('discord-buttons')(client);
-
 client.config = {
     prefix: process.env.PREFIX
 }
@@ -32,17 +30,6 @@ fs.readdir("./commands/", (err, files) => {
     files.forEach((file) => {
         if (!file.endsWith(".js")) return;
         let props = require(`./commands/${file}`);
-        let commandName = file.split(".")[0];
-        client.commands.set(commandName, props);
-        console.log("Loading Command: " + commandName)
-    });
-});
-
-fs.readdir("./soundboard/", (err, files) => {
-    if (err) return console.error(err);
-    files.forEach((file) => {
-        if (!file.endsWith(".js")) return;
-        let props = require(`./soundboard/${file}`);
         let commandName = file.split(".")[0];
         client.commands.set(commandName, props);
         console.log("Loading Command: " + commandName)
